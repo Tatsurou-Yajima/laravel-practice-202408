@@ -14,11 +14,11 @@ class HelloController extends Controller
 
     public function index(Request $request)
     {
-        $sampleMsg = config('sample.message');
-        $sampleData = config('sample.data');
+        $sampleMsg = env('SAMPLE_MESSAGE');
+        $sampleData = env('SAMPLE_DATA');
         $data = [
             'msg' => $sampleMsg,
-            'data' => $sampleData,
+            'data' => explode(',', $sampleData),
         ];
         return view('hello.index', $data);
     }
