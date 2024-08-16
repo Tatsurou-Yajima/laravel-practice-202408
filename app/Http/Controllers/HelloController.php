@@ -13,4 +13,10 @@ class HelloController extends Controller
         ];
         return view('hello.index', $data);
     }
+
+    public function other()
+    {
+        // hello というルート名を使ってリダイレクトしている
+        return redirect()->route('hello');
+    }
 }
