@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // サーバー起動時に実行される
+        config([
+            'sample.data' => ['こんにちは', 'どうも', 'さようなら'],
+        ]);
     }
 }
