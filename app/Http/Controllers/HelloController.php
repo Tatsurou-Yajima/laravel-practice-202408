@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HelloController extends Controller
 {
+    private $fileName;
+
     public function __construct()
     {
         // config/sample の message を上書きする
         config(['sample.message' => '新しいメッセージ!']);
+        $this->fileName = 'sample.txt';
     }
 
     public function index(Request $request)
     {
-        $sampleMsg = env('SAMPLE_MESSAGE');
-        $sampleData = env('SAMPLE_DATA');
+        $sampleMsg = $this->fileName;
+        $sampleData = Storage::get($this->fileName);
         $data = [
             'msg' => $sampleMsg,
             'data' => explode(',', $sampleData),
@@ -23,14 +27,12 @@ class HelloController extends Controller
         return view('hello.index', $data);
     }
 
-    public function other(Request $request)
+    public function other(string $msg)
     {
-        $data = [
-            'msg' => $request->bye,
-        ];
+        Storage::append($this->fileName, $msg);
         // hello というルート名を使ってリダイレクトしている
         // return redirect()->route('hello');
 
-        return view('hello.index', $data);
+        return redirect()->route('hello');
     }
 }
