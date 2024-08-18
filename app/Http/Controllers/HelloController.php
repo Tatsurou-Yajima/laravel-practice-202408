@@ -18,11 +18,18 @@ class HelloController extends Controller
 
     public function index(Request $request)
     {
-        $sampleMsg = $this->fileName;
-        $sampleData = Storage::get($this->fileName);
+        $msg = 'Please input text.';
+        $keys = [];
+        $values = [];
+        if ($request->isMethod('post')) {
+            $form = $request->all();
+            $keys = array_keys($form);
+            $values = array_values($form);
+        }
         $data = [
-            'msg' => $sampleMsg,
-            'data' => explode(',', $sampleData),
+            'msg' => $msg,
+            'keys' => $keys,
+            'values' => $values,
         ];
         return view('hello.index', $data);
     }
