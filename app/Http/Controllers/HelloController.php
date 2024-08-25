@@ -21,7 +21,7 @@ class HelloController extends Controller
     {
         $data = [
             'msg' => $myService->say(),
-            'data' => $myService->data(),
+            'data' => $myService->allData(),
         ];
         return view('hello.index', $data);
     }

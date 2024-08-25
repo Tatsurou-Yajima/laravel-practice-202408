@@ -2,7 +2,7 @@
 
 namespace App\MyClasses;
 
-class MyService
+class MyService implements MyServiceInterface
 {
     private $msg;
     private $data;
@@ -13,12 +13,21 @@ class MyService
         $this->data = ['hello', 'welcome', 'bye'];
     }
 
+    public function setId(int $id) {}
+
     public function say()
     {
         return $this->msg;
     }
 
-    public function data()
+    public function data(int $id)
+    {
+        return $this->data[$id];
+    }
+
+    public function setData() {}
+
+    public function allData()
     {
         return $this->data;
     }
