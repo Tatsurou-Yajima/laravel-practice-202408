@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\MyClasses\MyService;
 
 class HelloController extends Controller
 {
@@ -16,20 +17,11 @@ class HelloController extends Controller
         $this->fileName = 'sample.txt';
     }
 
-    public function index(Request $request)
+    public function index(MyService $myService)
     {
-        $msg = 'Please input text.';
-        $keys = [];
-        $values = [];
-        if ($request->isMethod('post')) {
-            $form = $request->all();
-            $keys = array_keys($form);
-            $values = array_values($form);
-        }
         $data = [
-            'msg' => $msg,
-            'keys' => $keys,
-            'values' => $values,
+            'msg' => $myService->say(),
+            'data' => $myService->data(),
         ];
         return view('hello.index', $data);
     }

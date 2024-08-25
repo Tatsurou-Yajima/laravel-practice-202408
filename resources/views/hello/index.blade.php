@@ -10,19 +10,11 @@
 <body>
     <h1>Hello/Index</h1>
     <p>{!! $msg !!}</p>
-    <form action="/hello" method="post">
-        @csrf
-        <div>NAME: <input type="text" name="name"></div>
-        <div>MAIL: <input type="text" name="mail"></div>
-        <div>tel: <input type="text" name="tel"></div>
-        <input type="submit" value="送信">
-    </form>
-    <hr>
-    <ol>
-        @for ($i = 0; $i < count($keys); $i++)
-            <li>{{ $keys[$i] }}:{{ $values[$i] }}</li>
-            @endfor
-    </ol>
+    <ul>
+        @foreach ($data as $item)
+        <li>{!! $item !!}</li>
+        @endforeach
+    </ul>
 </body>
 
 </html>

@@ -10,13 +10,13 @@ Route::get('/', function () {
 });
 
 Route::middleware([HelloMiddleware::class])->group(function () {
-    Route::get('/hello', [HelloController::class, 'index']);
-    Route::post('/hello', [HelloController::class, 'index']);
+    Route::get('/hello', [HelloController::class, 'index'])->name('hello');
+    // Route::post('/hello', [HelloController::class, 'index']);
     // Route::get('/hello/other', [HelloController::class, 'other']);
-    Route::get('/hello/{msg}', [HelloController::class, 'other']);
+    // Route::get('/hello/{msg}', [HelloController::class, 'other']);
 
     // id が数字の場合のみ index を表示する。それ以外は 404エラー にする。
-    Route::get('/hello/{id}', [HelloController::class, 'index'])->where('id', '[0-9]+');
+    // Route::get('/hello/{id}', [HelloController::class, 'index'])->where('id', '[0-9]+');
 });
 
 // Sample ディレクトリ以下をまとめて指定できるのが便利
