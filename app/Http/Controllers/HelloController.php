@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\MyJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\MyClasses\MyService;
@@ -19,6 +20,7 @@ class HelloController extends Controller
 
     public function index(MyService $myService)
     {
+        MyJob::dispatch();
         $data = [
             'msg' => $myService->say(),
             'data' => $myService->allData(),
